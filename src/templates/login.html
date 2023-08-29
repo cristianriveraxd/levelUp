@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio de Sesión</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styleapp.css')}}">
+</head>
+
+<body>
+  <div class="login-container">
+    <h2>Iniciar Sesión</h2>
+    <form action="/login" method="POST"> <!--Redirección a ruta login-->
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> 
+      <input type="text" placeholder="Usuario" name="user" required>
+      <input type="password" placeholder="Contraseña" name="password" required>
+      {% with messages = get_flashed_messages() %}<!--Función para capturar el mensaje que emite flash-->
+      {% if messages %}
+      <br>
+      {% for message in messages %}
+      <div>
+        <stron> {{ message }}</stron>
+        <button type="button">closed</button>
+      </div>
+      {% endfor %}
+      {% endif%}
+      {% endwith %}
+      <button type="submit" name="login" value="login" action="login">Ingresar</button>
+    </form>
+    <div>
+      <br>
+      <a href="/registro" class="registro-link">Registrarse</a>
+    </div>
+  </div>
+  <div class="registrase">
+
+  </div>
+</body>
+
+</html>

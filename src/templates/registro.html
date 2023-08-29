@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styleform.css')}}">
+    <title>Formulario de Registro</title>
+</head>
+
+<body>
+    <h1>Formulario de Registro</h1>
+    <div class="login-container">
+        <form action="/registro" method="POST" onsubmit="return validarFormulario()">
+        <!-- token de seguridad -->
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> 
+
+
+        <label for="usuario">Usuario:</label>
+        <input type="text" id="usuario" name="usuario" required><br><br>
+
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena" required><br><br>
+
+        <label for="validar_contrasena">Validar Contraseña:</label>
+        <input type="password" id="validar_contrasena" name="validar_contrasena" required><br><br>
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" required><br><br>
+
+        <label for="correo">Correo:</label>
+        <input type="email" id="correo" name="correo" required><br><br>
+
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" name="edad" required><br><br>
+
+        <label for="region">Región:</label>
+        <select id="region" name="region" required>
+            <option value="norte">Norte</option>
+            <option value="sur">Sur</option>
+            <option value="este">Este</option>
+            <option value="oeste">Oeste</option>
+        </select><br><br>
+
+        <input type="submit" value="Registrar">
+    </form>
+    <a class="registro-link" href="/login">¿Ya tienes cuenta?</a>
+</div>
+    <script>
+        function validarFormulario() {
+            var contrasena = document.getElementById("contrasena").value;
+            var validarContrasena = document.getElementById("validar_contrasena").value;
+            if (contrasena !== validarContrasena) {
+                alert("Las contraseñas no coinciden");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+
+</html>
