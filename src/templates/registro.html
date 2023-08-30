@@ -50,6 +50,7 @@
     <a class="registro-link" href="/login">¿Ya tienes cuenta?</a>
 </div>
     <script>
+
         function validarFormulario() {
             var contrasena = document.getElementById("contrasena").value;
             var validarContrasena = document.getElementById("validar_contrasena").value;
@@ -57,7 +58,15 @@
                 alert("Las contraseñas no coinciden");
                 return false;
             }
+            var flashMessages = "{{ get_flashed_messages() }}"
+            if (flashMessages){
+                alert(flashMessages)
+            }
             return true;
+        }
+
+        function redirigirLogin(){
+            window.location.href="/login";
         }
     </script>
 </body>

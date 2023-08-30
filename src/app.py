@@ -43,6 +43,7 @@ def login():
                 return redirect(url_for("home"))
             else:
                 flash("Contraseña incorrecta")
+                return render_template('login.html')
         else:
             flash("Usuario no encontrado") 
             return render_template('login.html')#si se envie un post
@@ -69,6 +70,8 @@ def checkin():
             cursor.execute(sql, (username, hashed_password, name, lastname, email, age, region)) #tupla
             db.connection.commit()
             cursor.close()
+            flash("!Registro exitoso!", "success")
+            return render_template('login.html')
         except Exception as e:
             raise Exception(e)
     return render_template('registro.html')    
